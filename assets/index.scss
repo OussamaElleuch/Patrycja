@@ -1,0 +1,31 @@
+// colors
+$primary: #0b7e40;
+// breakpoints for responsive design
+$xs: 600px;
+$sm: 960px;
+$md: 1200px;
+$lg: 1904px;
+
+// mixins for responsive design
+@mixin for-mobile {
+  @media (max-width: $xs) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape {
+  @media (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: $md) {
+    @content;
+  }
+}
+@mixin for-big-desktop {
+  @media (min-width: $lg) {
+    @content;
+  }
+}
