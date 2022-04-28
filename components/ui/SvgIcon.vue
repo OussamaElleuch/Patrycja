@@ -15,7 +15,7 @@ export default Vue.extend({
         id: {
             type: String,
             required: true
-        }
+        }        
     }
 })
 </script>

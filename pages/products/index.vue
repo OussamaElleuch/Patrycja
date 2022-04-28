@@ -19,14 +19,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { axiosInstance, PRODUCTS } from '@/data/index.js'
+import { getAllProducts } from '@/data/index.js'
 import Product from '@/components/products/Product.vue'
 
 export default Vue.extend({
   name: 'Products',
   components: { Product },
   async asyncData() {
-    const products = await axiosInstance(PRODUCTS)
+    const products = await getAllProducts()
     return { products }
   },
 })
