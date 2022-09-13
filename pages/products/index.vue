@@ -48,17 +48,19 @@ export default Vue.extend({
   },
   computed: {
     filteredProducts() {
+      let result = this.products
       if (this.searchQuery !== '') {
-        return getProductsByKeywords(this.products, this.searchQuery)
-      } else if (this.priceRange) {
-        return getProductsByPriceRange(
-          this.products,
+        result = getProductsByKeywords(result, this.searchQuery)
+      }
+
+      if (this.priceRange) {
+        result = getProductsByPriceRange(
+          result,
           this.priceRange.min,
           this.priceRange.max
         )
-      } else {
-        return this.products
       }
+      return result
     },
   },
   methods: {
