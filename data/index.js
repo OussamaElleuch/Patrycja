@@ -21,22 +21,12 @@ function getProductsByKeywords(products, keywords) {
   return result;
 }
 
-function getProductsByMinPrice(products, minPrice) {
+function getProductsByPriceRange(products, minPrice, maxPrice) {
   const filteredResult = products.filter(({ price }) => {
-    console.log('lol')
-    return price > minPrice
-  })
-  const sortedResult = filteredResult.sort((a, b) => (a.price > b.price) ? 1 : -1)
-  return sortedResult
-}
-
-function getProductsByMaxPrice(products, maxPrice) {
-  const filteredResult = products.filter(({ price }) => {
-    console.log('lol')
-    return price < maxPrice
+    return price < maxPrice && price > minPrice
   })
   const sortedResult = filteredResult.sort((a, b) => (a.price < b.price) ? 1 : -1)
   return sortedResult
 }
 
-export { PRODUCTS, getAllProducts, getProductsByKeywords, getProductsByMinPrice, getProductsByMaxPrice }
+export { PRODUCTS, getAllProducts, getProductsByKeywords, getProductsByPriceRange }

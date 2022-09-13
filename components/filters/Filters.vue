@@ -10,17 +10,17 @@
       <div>
         <label>min price input</label>
         <input
-          v-model="searchMinPrice"
+          v-model="searchPrice.min"
           class="min"
-          @change="searchMinPriceHandler"
+          @change="searchPriceHandler"
         />
       </div>
       <div>
         <label>max price input</label>
         <input
-          v-model="searchMaxPrice"
+          v-model="searchPrice.max"
           class="max"
-          @change="searchMaxPriceHandler"
+          @change="searchPriceHandler"
         />
       </div>
     </div>
@@ -38,19 +38,15 @@ export default Vue.extend({
   data() {
     return {
       searchKeywords: null,
-      searchMinPrice: 0,
-      searchMaxPrice: 10000,
+      searchPrice: { min: 0, max: 0 },
     }
   },
   methods: {
     searchKeywordsChangeHandler() {
       this.$emit('filtered-keywords', this.searchKeywords)
     },
-    searchMinPriceHandler() {
-      this.$emit('filtered-min-price', this.searchMinPrice)
-    },
-    searchMaxPriceHandler() {
-      this.$emit('filtered-max-price', this.searchMaxPrice)
+    searchPriceHandler() {
+      this.$emit('filtered-price', this.searchPrice)
     },
   },
 })

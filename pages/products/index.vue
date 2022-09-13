@@ -2,8 +2,7 @@
   <div class="products">
     <div class="products__filters">
       <Filters
-        @filtered-min-price="filteredMinPrice"
-        @filtered-max-price="filteredMaxPrice"
+        @filtered-price="filteredPrice"
         @filtered-keywords="filteredKeywords"
       />
     </div>
@@ -28,8 +27,7 @@ import Vue from 'vue'
 import {
   getAllProducts,
   getProductsByKeywords,
-  getProductsByMinPrice,
-  getProductsByMaxPrice,
+  getProductsByPriceRange,
 } from '@/data/index.js'
 import Product from '@/components/products/Product.vue'
 import Filters from '@/components/filters/Filters.vue'
@@ -45,21 +43,20 @@ export default Vue.extend({
   data() {
     return {
       searchQuery: '',
-      newFilteredMinPrice: 0,
-      newFilteredMaxPrice: 9999999,
+      priceRange: null,
     }
   },
   computed: {
     filteredProducts() {
       if (this.searchQuery !== '') {
         return getProductsByKeywords(this.products, this.searchQuery)
-      } else if (this.newFilteredMinPrice !== 0) {
-        return getProductsByMinPrice(this.products, this.newFilteredMinPrice)
-      } else if (this.newFilteredMaxPrice !== 9999999) {
-        return getProductsByMaxPrice(this.products, this.newFilteredMaxPrice)
+      } else if (this.priceRange) {
+        return getProductsByPriceRange(
+          this.products,
+          this.priceRange.min,
+          this.priceRange.max
+        )
       } else {
-        console.log(this.products, 'prd')
-
         return this.products
       }
     },
@@ -68,13 +65,8 @@ export default Vue.extend({
     filteredKeywords(keywords) {
       this.searchQuery = keywords
     },
-    filteredMinPrice(minPrice) {
-      this.newFilteredMinPrice = minPrice
-      console.log(minPrice, 'minPrice')
-    },
-    filteredMaxPrice(maxPrice) {
-      this.newFilteredMaxPrice = maxPrice
-      console.log(maxPrice, 'maxPrice')
+    filteredPrice(priceRange) {
+      this.priceRange = priceRange
     },
   },
 })
