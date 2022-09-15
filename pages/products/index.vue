@@ -4,6 +4,7 @@
       <Filters
         @filtered-price="filteredPrice"
         @filtered-keywords="filteredKeywords"
+        @filtered-rating="filteredRating"
       />
     </div>
     <div class="products__list">
@@ -28,6 +29,7 @@ import {
   getAllProducts,
   getProductsByKeywords,
   getProductsByPriceRange,
+  getProductsByRatingRange,
 } from '@/data/index.js'
 import Product from '@/components/products/Product.vue'
 import Filters from '@/components/filters/Filters.vue'
@@ -44,6 +46,7 @@ export default Vue.extend({
     return {
       searchQuery: '',
       priceRange: null,
+      ratingRange: null,
     }
   },
   computed: {
@@ -60,6 +63,10 @@ export default Vue.extend({
           this.priceRange.max
         )
       }
+
+      if (this.ratingRange) {
+        result = getProductsByRatingRange(result, this.ratingRange)
+      }
       return result
     },
   },
@@ -69,6 +76,9 @@ export default Vue.extend({
     },
     filteredPrice(priceRange) {
       this.priceRange = priceRange
+    },
+    filteredRating(ratingRange) {
+      this.ratingRange = ratingRange
     },
   },
 })

@@ -29,4 +29,11 @@ function getProductsByPriceRange(products, minPrice, maxPrice) {
   return sortedResult
 }
 
-export { PRODUCTS, getAllProducts, getProductsByKeywords, getProductsByPriceRange }
+function getProductsByRatingRange(products, rating) {
+  const filteredRating = products.filter(({ rate }) => {
+    return rate >= rating
+  })
+  return filteredRating
+}
+
+export { PRODUCTS, getAllProducts, getProductsByKeywords, getProductsByPriceRange, getProductsByRatingRange }
