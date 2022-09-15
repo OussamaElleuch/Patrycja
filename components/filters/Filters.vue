@@ -29,7 +29,7 @@
       <label>Rating</label>
       <select v-model="searchRating" class="min" @change="searchRatingHandler">
         <option disabled>Choose rating</option>
-        <option v-for="option in options" :key="option + 1" :value="option">
+        <option v-for="(option, index) in options" :key="index" :value="option">
           {{ option }}
         </option>
       </select>
