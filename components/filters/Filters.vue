@@ -26,7 +26,13 @@
     </div>
 
     <div class="filters__ratings">
-      <div class="min">dropdown with min rating to select</div>
+      <label>Rating</label>
+      <select v-model="searchRating" class="min" @change="searchRatingHandler">
+        <option disabled>Choose rating</option>
+        <option v-for="option in options" :key="option + 1" :value="option">
+          {{ option }}
+        </option>
+      </select>
     </div>
   </div>
 </template>
@@ -38,7 +44,9 @@ export default Vue.extend({
   data() {
     return {
       searchKeywords: null,
-      searchPrice: { min: 0, max: 0 },
+      searchPrice: { min: 0, max: 10000 },
+      searchRating: 0,
+      options: [1, 2, 3, 4, 5],
     }
   },
   methods: {
@@ -47,6 +55,9 @@ export default Vue.extend({
     },
     searchPriceHandler() {
       this.$emit('filtered-price', this.searchPrice)
+    },
+    searchRatingHandler() {
+      this.$emit('filtered-rating', this.searchRating)
     },
   },
 })
