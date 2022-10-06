@@ -24,6 +24,9 @@
 </template>
 
 <script>
+// 1. create base input, select, button according to atomic design pattern - apply the changes to filters
+// 2. create cart page,open pop up for the number of elements to add and redirect to cart page -> cards with products, number of elements,
+// 3. look into the store
 import Vue from 'vue'
 import {
   getAllProducts,
