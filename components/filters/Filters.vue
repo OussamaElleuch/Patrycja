@@ -22,13 +22,15 @@
     </div>
 
     <div class="filters__ratings">
-      <label>Rating</label>
-      <select v-model="searchRating" class="min" @change="searchRatingHandler">
-        <option disabled>Choose rating</option>
-        <option v-for="(option, index) in options" :key="index" :value="option">
-          {{ option }}
-        </option>
-      </select>
+      {{ searchRating }}
+      <BaseSelect
+        v-model="searchRating"
+        label="Rating"
+        disabled-option="Choose rating"
+        :options="options"
+        class="min"
+        @selected-option="searchRatingHandler"
+      />
     </div>
   </div>
 </template>
@@ -36,15 +38,17 @@
 <script lang="ts">
 import Vue from "vue";
 import BaseInput from "@/components/ui/atoms/BaseInput.vue";
+import BaseSelect from "@/components/ui/atoms/BaseSelect.vue";
+
 export default Vue.extend({
   name: "Filters",
-  components: { BaseInput },
+  components: { BaseInput, BaseSelect },
   data() {
     return {
       searchKeywords: null,
       searchPrice: { min: 0, max: 10000 },
       searchRating: 0,
-      options: [1, 2, 3, 4, 5],
+      options: [1, 2, 3, 4],
     };
   },
   methods: {
@@ -54,8 +58,8 @@ export default Vue.extend({
     searchPriceHandler() {
       this.$emit("filtered-price", this.searchPrice);
     },
-    searchRatingHandler() {
-      this.$emit("filtered-rating", this.searchRating);
+    searchRatingHandler(searchRating: Number) {
+      this.$emit("filtered-rating", searchRating);
     },
   },
 });
